@@ -101,6 +101,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20,bottom: Dimensions.width20,),
                   child: Row(
                     children: [
+                      //Image section
                       Container(
                         height:120,
                         width:120,
@@ -113,6 +114,19 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             ),
                             fit: BoxFit.cover,
                           ),
+                        ),
+                      ),
+
+                      //Content section
+                      Container(
+                        height:100,
+                        width:200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.radius20),
+                            bottomRight: Radius.circular(Dimensions.radius20),
+                          ),
+                          color: Colors.white
                         ),
                       ),
                     ],
