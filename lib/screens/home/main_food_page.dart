@@ -1,5 +1,5 @@
 
-import 'package:ecommerce/home/food_page_body.dart';
+import 'package:ecommerce/screens/home/food_page_body.dart';
 import 'package:ecommerce/utils/colors.dart';
 import 'package:ecommerce/utils/dimensions.dart';
 import 'package:ecommerce/widgets/big_text.dart';

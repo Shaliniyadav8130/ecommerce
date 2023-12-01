@@ -20,11 +20,20 @@ class Dimensions{
 
 
   static double font20 = screenHeight/42.2;
+  static double font26 = screenHeight/32.46;
+
   static double radius20 = screenHeight/42.2;
   static double radius30 = screenHeight/28.3;
   static double radius15 = screenHeight/56.27;
 
   static double iconSize24 = screenHeight/35.17;
+  static double iconSize16 = screenHeight/52.75;
 
+  //List view size
+  static double listViewImgSize = screenWidth/3.25;
+  static double listViewTextContSize = screenWidth/3.9;
+
+  // Popular food
+  static double popularFoodImgSize = screenHeight/2.41;
 
 }

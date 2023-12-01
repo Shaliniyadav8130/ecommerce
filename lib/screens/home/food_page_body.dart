@@ -1,5 +1,6 @@
 import 'package:ecommerce/utils/colors.dart';
 import 'package:ecommerce/utils/dimensions.dart';
+import 'package:ecommerce/widgets/app_columns.dart';
 import 'package:ecommerce/widgets/big_text.dart';
 import 'package:ecommerce/widgets/icontext_widget.dart';
 import 'package:ecommerce/widgets/small_text.dart';
@@ -103,8 +104,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     children: [
                       //Image section
                       Container(
-                        height:120,
-                        width:120,
+                        height:Dimensions.listViewImgSize,
+                        width:Dimensions.listViewTextContSize,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(Dimensions.radius20),
                           color: Colors.white38,
@@ -118,15 +119,40 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ),
 
                       //Content section
-                      Container(
-                        height:100,
-                        width:200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(Dimensions.radius20),
-                            bottomRight: Radius.circular(Dimensions.radius20),
+                      Expanded(
+                        child: Container(
+                          height:Dimensions.listViewTextContSize,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(Dimensions.radius20),
+                              bottomRight: Radius.circular(Dimensions.radius20),
+                            ),
+                            color: Colors.white
                           ),
-                          color: Colors.white
+                          child: Padding(
+                            padding: EdgeInsets.only(left:Dimensions.width10,right:Dimensions.width10),
+                            child:Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                BigText(text: "Nutritious fruit meal in china"),
+                                SizedBox(height:Dimensions.height10),
+                                SmallText(text: "With chinese characteristics"),
+                                SizedBox(height:Dimensions.height10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconAndText(icon: Icons.circle_sharp,iconColor: AppColors.iconColor1,text: "Normal"),
+
+                                    IconAndText(icon: Icons.location_on_outlined,iconColor: AppColors.mainColor,text: "1.7Km"),
+
+                                    IconAndText(icon: Icons.access_time_rounded,iconColor: AppColors.iconColor2,text: "32 min"),
+
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -204,42 +230,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                ),
                child: Container(
                  padding: EdgeInsets.only(left:Dimensions.width15,right:Dimensions.width15,top: Dimensions.height15),
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     BigText(text: "Chinese side"),
-                     SizedBox(height:Dimensions.height10),
-                     Row(
-                       children: [
-                         Wrap(
-                           children: List.generate(
-                             5,
-                                 (index) => Icon(Icons.star, color: AppColors.mainColor, size: 15),
-                           ).expand((icon) => [icon]).toList(),
-                         ),
-
-                         SizedBox(width:10),
-
-                         SmallText(text: "4.5"),
-                         SizedBox(width:10),
-                         SmallText(text: "1287"),
-                         SizedBox(width:10),
-                         SmallText(text: "comments")
-                       ],
-                     ),
-                     SizedBox(height:Dimensions.height20),
-
-                     Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                         IconAndText(icon: Icons.circle_sharp,iconColor: AppColors.iconColor1,text: "Normal"),
-                         IconAndText(icon: Icons.location_on_outlined,iconColor: AppColors.mainColor,text: "1.7Km"),
-                         IconAndText(icon: Icons.access_time_rounded,iconColor: AppColors.iconColor2,text: "32 min"),
-
-                       ],
-                     ),
-                   ],
-                 ),
+                 child: AppColumns(text:"Chinese side"),
                ),
              ),
            ),

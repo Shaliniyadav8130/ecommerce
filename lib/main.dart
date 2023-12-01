@@ -1,5 +1,5 @@
-import 'package:ecommerce/home/main_food_page.dart';
-import 'package:ecommerce/users/authentication/login_screen.dart';
+import 'package:ecommerce/screens/food/popular_food_detail.dart';
+import 'package:ecommerce/screens/home/main_food_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MainFoodPage()
+      home: PopularFoodDetail()
     );
   }
 }
