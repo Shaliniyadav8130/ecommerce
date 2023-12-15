@@ -1,3 +1,4 @@
+import 'package:ecommerce/controllers/popular_product_controller.dart';
 import 'package:ecommerce/utils/colors.dart';
 import 'package:ecommerce/utils/dimensions.dart';
 import 'package:ecommerce/widgets/app_columns.dart';
@@ -7,6 +8,7 @@ import 'package:ecommerce/widgets/small_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class FoodPageBody extends StatefulWidget {
@@ -44,29 +46,33 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return  Column(
       children: [
         // Slider Section
-      Container(
-      height:Dimensions.pageView,
-      //color: Colors.red,
-      child: PageView.builder(
-          controller: pageController,
-          itemCount: 5,
-          itemBuilder: (context,position){
-            return _buildPageItem(position);
-          }
-      ),
-    ),
+      GetBuilder<PopularProductController>(builder: (popularProducts){
+        return Container(
+          height:Dimensions.pageView,
+          //color: Colors.red,
+          child: PageView.builder(
+              controller: pageController,
+              itemCount: popularProducts.popularProductList.length,
+              itemBuilder: (context,position){
+                return _buildPageItem(position);
+              }
+          ),
+        );
+      }),
 
     // Dots Section
-    new DotsIndicator(
-    dotsCount: 5,
-    position: _currPageValue.toInt(),
-    decorator: DotsDecorator(
-      activeColor: AppColors.mainColor,
-    size: const Size.square(9.0),
-    activeSize: const Size(18.0, 9.0),
-    activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-    ),
-    ),
+    GetBuilder<PopularProductController>(builder: (popularProducts){
+      return new DotsIndicator(
+        dotsCount: popularProducts.popularProductList.length<=0?1:popularProducts.popularProductList.length,
+        position: _currPageValue.toInt(),
+        decorator: DotsDecorator(
+          activeColor: AppColors.mainColor,
+          size: const Size.square(9.0),
+          activeSize: const Size(18.0, 9.0),
+          activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        ),
+      );
+    }),
 
     // Popular Section
     SizedBox(height:Dimensions.height20),
@@ -229,7 +235,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                  ]
                ),
                child: Container(
-                 padding: EdgeInsets.only(left:Dimensions.width15,right:Dimensions.width15,top: Dimensions.height15),
+                 padding: EdgeInsets.only(left:Dimensions.width15,right:Dimensions.width15,top:Dimensions.height10),
                  child: AppColumns(text:"Chinese side"),
                ),
              ),
