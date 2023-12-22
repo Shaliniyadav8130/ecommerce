@@ -1,3 +1,7 @@
+import 'package:ecommerce/controllers/recommended_product_controller.dart';
+import 'package:ecommerce/routes/route_helper.dart';
+import 'package:ecommerce/screens/home/main_food_page.dart';
+import 'package:ecommerce/utils/app_constants.dart';
 import 'package:ecommerce/utils/colors.dart';
 import 'package:ecommerce/utils/dimensions.dart';
 import 'package:ecommerce/widgets/app_icon.dart';
@@ -5,22 +9,32 @@ import 'package:ecommerce/widgets/big_text.dart';
 import 'package:ecommerce/widgets/expandable_text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  RecommendedFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body:CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 80,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                onTap: (){
+                  Get.to(()=>MainFoodPage());
+                 },
+                  child: AppIcon(icon: Icons.clear),
+                ),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
@@ -36,7 +50,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   )
                 ),
                 child: Center(
-                  child:BigText(size:Dimensions.font26,text:"Chinese Side"),
+                  child:BigText(size:Dimensions.font26,text:product.name!),
                 ),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top:5,bottom:10),
@@ -46,7 +60,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             expandedHeight: 300,
             backgroundColor: AppColors.yellowColor,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset("assets/images/food1.jpg",
+              background: Image.network(AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -56,7 +70,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  child: ExpandableTextWidget(text: "Food, substance consisting essentially of protein, carbohydrate, fat, and other nutrients used in the body of an organism to sustain growth and vital processes and to furnish energy. The absorption and utilization of food by the body is fundamental to nutrition and is facilitated by digestion. Plants, which convert solar energy to food by photosynthesis, are the primary food source. Animals that feed on plants often serve as sources of food for other animals. To learn more about the sequence of transfers of matter and energy in the form of food from organism to organism, see food chain.You are what you eat? Weird food factsYou are what you eat? Weird food factsOverview of weird facts about food.See all videos for this articleHunting and gathering, horticulture, pastoralism, and the development of agriculture are the primary means by which humans have adapted to their environments to feed themselves. Food has long served as a carrier of culture in human societies and has been a driving force for globalization. This was especially the case during the early phases of European trade and colonial expansion, when foods such as the hot red pepper, corn (maize), and sweet potatoes spread throughout Europe to Africa and Asia.Food, substance consisting essentially of protein, carbohydrate, fat, and other nutrients used in the body of an organism to sustain growth and vital processes and to furnish energy. The absorption and utilization of food by the body is fundamental to nutrition and is facilitated by digestion. Plants, which convert solar energy to food by photosynthesis, are the primary food source. Animals that feed on plants often serve as sources of food for other animals. To learn more about the sequence of transfers of matter and energy in the form of food from organism to organism, see food chain.Food, substance consisting essentially of protein, carbohydrate, fat, and other nutrients used in the body of an organism to sustain growth and vital processes and to furnish energy. The absorption and utilization of food by the body is fundamental to nutrition and is facilitated by digestion. Plants, which convert solar energy to food by photosynthesis, are the primary food source. Animals that feed on plants often serve as sources of food for other animals. To learn more about the sequence of transfers of matter and energy in the form of food from organism to organism, see food chain."),
+                  child: ExpandableTextWidget(text: product.description!),
                    margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20),
                 ),
               ],
@@ -78,7 +92,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppIcon(iconSize: Dimensions.iconSize24,iconColor: Colors.white,backgroundColor: AppColors.mainColor,icon: Icons.remove),
-                BigText(text: "\$12.88 "+" X "+" 0 ",color: AppColors.mainBlackColor,size: Dimensions.font26,),
+                BigText(text: "\$ ${product.price!}  X 0 ",color: AppColors.mainBlackColor,size: Dimensions.font26,),
                 AppIcon(iconSize: Dimensions.iconSize24,iconColor: Colors.white,backgroundColor: AppColors.mainColor,icon: Icons.add)
               ],
             )
@@ -111,7 +125,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     borderRadius:BorderRadius.circular(Dimensions.radius20),
                     color: AppColors.mainColor,
                   ),
-                  child: BigText(text:"\$10 | Add to Cart",color: Colors.white,),
+                  child: BigText(text:"\$ ${product.price!} | Add to Cart",color: Colors.white,),
                 )
               ],
             ),
