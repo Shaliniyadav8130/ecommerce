@@ -1,3 +1,4 @@
+import 'package:ecommerce/controllers/cart_controller.dart';
 import 'package:ecommerce/controllers/popular_product_controller.dart';
 import 'package:ecommerce/screens/home/main_food_page.dart';
 import 'package:ecommerce/utils/app_constants.dart';
@@ -22,7 +23,7 @@ class PopularFoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var product = Get.find<PopularProductController>().popularProductList[pageId];
-    Get.find<PopularProductController>().initProduct();
+    Get.find<PopularProductController>().initProduct(product,Get.find<CartController>());
 
     return Scaffold(
       body:Stack(
@@ -124,7 +125,7 @@ class PopularFoodDetail extends StatelessWidget {
                     ),
 
                     SizedBox(width:Dimensions.width10/2),
-                    BigText(text: popularProduct.quantity.toString()),
+                    BigText(text: popularProduct.inCartItems.toString()),
                     SizedBox(width:Dimensions.width10/2),
                     GestureDetector(
                       onTap: (){
@@ -142,7 +143,11 @@ class PopularFoodDetail extends StatelessWidget {
                   borderRadius:BorderRadius.circular(Dimensions.radius20),
                   color: AppColors.mainColor,
                 ),
-                child: BigText(text:"\$ ${product.price!} | Add to Cart",color: Colors.white,),
+                child: GestureDetector(
+                  onTap: (){
+                    popularProduct.addItem(product);
+                  },
+                    child: BigText(text:"\$ ${product.price!} | Add to Cart",color: Colors.white,)),
               )
             ],
           ),
