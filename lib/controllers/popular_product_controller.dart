@@ -4,6 +4,7 @@ import 'package:ecommerce/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../models/cart_model.dart';
 import '../models/popular_product_model.dart';
 
 class PopularProductController extends GetxController{
@@ -52,6 +53,10 @@ class PopularProductController extends GetxController{
       backgroundColor: AppColors.mainColor,
         colorText: Colors.white
       );
+      if(_inCartItems>0){
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
     }
     else if((_inCartItems+quantity) >20){
@@ -94,6 +99,14 @@ class PopularProductController extends GetxController{
     //       colorText: Colors.white
     //   );
     // }
+    update();
+  }
 
+  int get totalItems{
+    return _cart.totalItems;
+  }
+
+  List<CartModel> get getItems{
+    return _cart.getItems;
   }
 }

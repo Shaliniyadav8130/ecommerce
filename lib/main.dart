@@ -1,5 +1,6 @@
 import 'package:ecommerce/controllers/popular_product_controller.dart';
 import 'package:ecommerce/routes/route_helper.dart';
+import 'package:ecommerce/screens/cart/cart_page.dart';
 import 'package:ecommerce/screens/food/popular_food_detail.dart';
 import 'package:ecommerce/screens/food/recommended_food_detail.dart';
 import 'package:ecommerce/screens/home/food_page_body.dart';
@@ -26,9 +27,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'ecommerce App ',
       debugShowCheckedModeBanner: false,
-      home: MainFoodPage(),
-      initialRoute: RouteHelper.initial,
-      getPages: RouteHelper.routes,
+      home: CartPage(),
+      //initialRoute: RouteHelper.initial,
+      //getPages: RouteHelper.routes,
     );
   }
 }
