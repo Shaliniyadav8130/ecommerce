@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'ecommerce App ',
       debugShowCheckedModeBanner: false,
-      home: CartPage(),
-      //initialRoute: RouteHelper.initial,
-      //getPages: RouteHelper.routes,
+      home: MainFoodPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }
